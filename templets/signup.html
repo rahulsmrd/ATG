@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}LogIn{% endblock %}
+{% block body %}
+{{ form_errors }}
+<div class="container">
+    <h1 class="text-center m-5">SignUp here</h1>
+    <form method="post" enctype="multipart/form-data" class="m-5 fs-5">
+        {% csrf_token %}
+        {{ Userform.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit" class="btn btn-outline-success">SignUp</button>
+    </form>
+</div>
+{% endblock %}

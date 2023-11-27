@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}LogIn{% endblock %}
+{% block dashboard_activate %}active{% endblock %}
+{% block body %}
+<div class="container my-5">
+    <h1 style="text-align: center;">Dashboard</h1>
+    {% if profile.is_doctor %}
+    <h3 style="text-align: center;">Welcome Doctor</h3>
+    {% else %}
+    <h3 style="text-align: center;">Welcome {{user.username}}</h3>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-6">
+        {% for dest in profile %}
+        
+            <label for="fname" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="fname" aria-describedby="emailHelp" value="{{dest.first_name}}"
+                readonly>
+                <label for="lname" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lname" aria-describedby="emailHelp" value="{{dest.last_name}}"
+                readonly>
+                <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" aria-describedby="emailHelp" value="{{user.email}}"
+                readonly>
+                <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" aria-describedby="emailHelp" value="{{dest.address}}"
+                readonly>
+                <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" aria-describedby="emailHelp" value="{{dest.city}}"
+                readonly>
+                <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" aria-describedby="emailHelp" value="{{dest.state}}"
+                readonly>
+                <label for="pin" class="form-label">Pin code</label>
+            <input type="text" class="form-control" id="pin" aria-describedby="emailHelp" value="{{dest.pin}}"
+                readonly>
+        </div>
+        <div class="col-md-6">
+            <h4 class="mt-3">Profile Picture</h4><br><br>
+            <img src="{{ dest.picture.url }}"  alt="Image Missing" style="width: 40em;">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
