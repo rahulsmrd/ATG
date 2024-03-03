@@ -1,12 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}LogIn{% endblock %}
+{% block title %}Home{% endblock %}
 {% block home_activate %}active{% endblock %}
 {% block body %}
-    <h1 class="text-center my-5">Explore the New and Desired Internships</h1>
-    <img src="{% static '1.png' %}" alt="no image" style="margin-left: -8em; width: 84em;">
-    <h1 class="text-center my-5">Experience the new Couser Offered</h1>
-    <img src="{% static '2.png' %}" alt="no image" style="margin-left: -8em; width: 84em;">
-    <h1 class="text-center my-5">Connect with us</h1>
-    <img src="{% static '3.png' %}" alt="no image" style="margin-left: -8em; width: 84em;">
+
+<h1 id="demo" class="text-center mt-5 mb-3"
+    style="color: rgb(36, 112, 46);text-decoration: underline;font-size: 5em;"></h1>
+
+<div class="container-fluid">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="background-color: aqua;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static '2.jpeg' %}" class="d-block w-100" alt="..." height="500em">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'hospital.png' %}" class="d-block w-100" alt="..." height="500em">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'hop.jpg' %}" class="d-block w-100" alt="..." height="500em">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'AIIMS-Logo.jpg' %}" class="d-block w-100" alt="..." height="500em">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="card text-bg-info mb-3" style="max-width: 60rem; background-color: rgb(211, 239, 245);">
+        <div class="card-header">
+            <h1>About us:</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">We Build the Future</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni adipisci consequatur
+                neque explicabo quis sed facilis consequuntur, quasi omnis obcaecati assumenda, asperiores quos unde
+                laborum ab provident architecto. Numquam, quam. Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Aut veniam beatae voluptatum quae porro reiciendis earum culpa alias! Perferendis, ipsum?
+                Explicabo assumenda alias sequi molestiae commodi doloremque, error accusantium quo.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 text-center">
+    <div class="card text-bg-info mb-3" style="max-width: 60rem; background-color: rgb(191, 241, 208);">
+        <div class="card-header">
+            <h1>LogIn to get more ...</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title mb-3">You can LogIn with Doctor or Patient Credentials</h5>
+            {% if user.is_authenticated %}
+                    <h3 style="color: rgb(85, 184, 101);" class="mx-5">Welcome {{ user.username }}</h3>
+                    <a href="{% url 'home:dashboard' %}" class="btn btn-outline-warning mx-2 me-5 fs-5" style="color:rgb(39, 39, 88) ;">Go to Dashboard</a>
+            {% else %}
+            <a href="{% url 'home:login' 1 %}" class="btn btn-outline-info me-5 fs-5" style="color: rgb(46, 87, 53);"><b>Doctor Login</b></a>
+            <a href="{% url 'home:login' 0 %}" class="btn btn-outline-warning fs-5" style="color: rgb(39, 39, 88);"><b>Patient Login</b></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var i = 0;
+    var txt = 'Welcome to ATG Hospitals';
+    var speed = 100;
+    typeWriter();
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("demo").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+</script>
+
 {% endblock %}

@@ -9,8 +9,9 @@ app_name='home'
 urlpatterns = [
     path('', views.index, name='home'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('contact/', views.contact, name='contact'),
     path('signup/', views.SignUp, name='signup'),
-    path("login/",auth_views.LoginView.as_view(template_name='login.html'),name="login"),
+    path("login/<pk>/",views.login_user,name="login"),
     path("logout/",auth_views.LogoutView.as_view(),name="logout"),
 
 ]

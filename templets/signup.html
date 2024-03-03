@@ -1,15 +1,101 @@
 {% extends 'base.html' %}
 
-{% block title %}LogIn{% endblock %}
+{% block title %}Sign Up{% endblock %}
 {% block body %}
 {{ form_errors }}
-<div class="container">
-    <h1 class="text-center m-5">SignUp here</h1>
-    <form method="post" enctype="multipart/form-data" class="m-5 fs-5">
-        {% csrf_token %}
-        {{ Userform.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit" class="btn btn-outline-success">SignUp</button>
-    </form>
+<h1 class="text-center m-5"><u>Sign Up here</u></h1>
+<div class="card my-5" style="background-color: rgb(243, 223, 223); border-radius: 1em;border: 3px solid black;">
+    <div class="card-body">
+        <div class="card-head">
+            <hr style="height: 0.5em;">
+        </div>
+        <div class="container" style="color: rgb(0, 0, 0);">
+            <form method="post" enctype="multipart/form-data" class="m-5 fs-5">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        {{ Userform.username.label }} {{ Userform.username }}
+                        <span class="fs-6">
+                            {{ Userform.username.help_text }}
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        {{ Userform.email.label }} {{ Userform.email }}
+                    </div>
+                </div> <br>
+                <div class="row">
+                    <div class="col-6">
+                        {{ Userform.password1.label }} : {{ Userform.password1 }}
+                        <span class="fs-6">
+                            {{Userform.password1.help_text}}
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        {{ Userform.password2.label }} : {{ Userform.password2 }}
+                        <span class="fs-6">
+                            {{ Userform.password2.help_text }}
+                        </span>
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-6">
+                        {{ profile_form.first_name.label }} : {{ profile_form.first_name }}
+                    </div>
+                    <div class="col-6">
+                        {{profile_form.last_name.label }} : {{profile_form.last_name }}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-12">
+                        {{ profile_form.picture.label }} : {{ profile_form.picture }}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-6">
+                        {{ profile_form.address.label }} : {{ profile_form.address }}
+                    </div>
+                    <div class="col-6">
+                        {{profile_form.city.label }} : {{profile_form.city }}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-6">
+                        {{ profile_form.state.label }} : {{ profile_form.state }}
+                    </div>
+                    <div class="col-6">
+                        {{profile_form.pin.label }} : {{profile_form.pin }}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-6 fs-4">
+                        <label for="check" class="fs-5">Are You a Doctor : </label>
+                        <input type="checkbox" name="check" id="check" class="fs-4" onclick="myfun()">
+                    </div>
+                    <div class="col-6" id="visib">
+                        <label for="doc_id" class="fs-5">Doctor Code :</label>
+                        <input type="number" name="doc_id" id="doc_id" class="form-control">
+                    </div>
+                    <script>
+                        doc = document.getElementById("visib").style.visibility = "hidden";
+                        function myfun() {
+                            k = document.getElementById("check");
+                            doc = document.getElementById("visib");
+                            if (k.checked) {
+                                doc.style.visibility = "visible";
+                            }
+                            else {
+                                doc.style.visibility = "hidden";
+                            }
+                        }
+                    </script>
+                </div><br>
+                <button class="btn btn-outline-success px-5 my-4 fs-5 form-control" type="submit">Sign Up</button>
+            </form>
+        </div>
+        <hr style="height: 0.5em;">
+
+
+    </div>
 </div>
+
 {% endblock %}

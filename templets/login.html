@@ -1,12 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}LogIn{% endblock %}
+{% block title %}Log In{% endblock %}
 {% block body %}
 
 <form method="post" style="font-weight: bold;font-size: 1.2em; text-align: center;">
-    <h1 class="m-5" style="color: green;">Please LogIn !!!</h1>
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-outline-success m-4 px-4 fs-5">LogIn</button>
+  {% csrf_token %}
+  <div class="card my-5" style="background-color: rgb(203, 240, 206);">
+    <div class="card-body">
+      <h1 class="m-5" style="color: green;border: 3px solid green; border-radius: 0.2em;">Please Log In !!!</h1>
+
+      <label for="username">Username :</label>
+      <input type="text" name="username" id="username" style="border:2px solid black;border-radius: 4px;"> <br><br>
+
+      <label for="password">Password :</label>
+      <input type="password" name="password" id="password" style="border:2px solid black;border-radius: 4px;"> <br>
+      <input type="checkbox" name="show" id="show" onclick="myFunction()"> Show password
+      {% if pk_user == '1' %}
+      <br><br>
+      <label for="doc_id">Doctor ID :</label>
+      <input type="number" name="doc_id" id="doc_id" style="border:2px solid black;border-radius: 4px;"><br><br>
+      <p style="color: red;">{{error}}</p>
+      <p>Are you a Patient ? <a href="{% url 'home:login' 0 %}">Patient Login</a></p>
+      {% else %}
+      <br><br>
+      <p>Are you a Doctor ? <a href="{% url 'home:login' 1 %}">Doctor Login</a></p>
+      {% endif %}
+
+      <p style="color: red;">{{error}}</p>
+
+      <p>Don't have an Account ? <a href="{% url 'home:signup' %}">Sign Up</a></p>
+
+      <button type="submit" class="btn btn-outline-success m-4 fs-5" style="width: 15em;"><b>LogIn</b></button>
+    </div>
+  </div>
 </form>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
 {% endblock %}

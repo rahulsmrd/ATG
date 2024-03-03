@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock %}
+{% block contact_activate %}active{% endblock %}
+{% block body %}
+<div class="container fs-5">
+    <h1 class="text-center my-5">Contact Us</h1>
+    <div class="card my-5" style="border: 2px solid black; background-color: rgb(203, 255, 203);">
+        <div class="card-body py-5 p-5">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row my-5">
+                    <div class="col-6">
+                        {{form.name.label}}: {{form.name}}
+                    </div>
+                    <div class="col-6">
+                        {{form.email.label}}: {{form.email}}
+                    </div>
+                </div>
+                <div class="row my-5">
+                    {{form.description.label}}: {{form.description}}
+                </div>
+                <button type="submit" class="btn btn-outline-success form-control fs-5"><b>Submit</b></button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

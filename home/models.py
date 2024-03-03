@@ -17,3 +17,15 @@ class profile(models.Model):
     state=models.CharField(max_length=100)
     pin=models.PositiveIntegerField()
     is_doctor=models.BooleanField(default=False)
+    doc_id=models.PositiveIntegerField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.user
+
+class contact_model(models.Model):
+    name=models.CharField(max_length=100)
+    email=models.EmailField(max_length=200)
+    description=models.TextField()
+
+    def __str__(self) -> str:
+        return self.name
