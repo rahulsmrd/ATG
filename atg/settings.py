@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'atg.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templets',],
+        'DIRS': ['home/templets','blog/templets'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,9 +78,9 @@ WSGI_APPLICATION = 'atg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'agt_intern',
+        'NAME': 'rahul_atg',
         'USER': 'root',
-        'PASSWORD': 'Rahul@20',
+        'PASSWORD': 'Rahul@2003',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

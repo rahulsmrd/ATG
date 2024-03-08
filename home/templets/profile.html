@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block profile2_activate %}active{% endblock %}
+{% block profile_activate %}{% endblock %}
+{% block body %}
+{% if profile.user == user %}
+<div class="card my-5" style="border: 2px solid black;border-radius: 0.8em;background-color: rgb(209, 255, 255);">
+  <div class="card-body">
+    <iv class="container">
+      <div class="row text-center">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2 my-4">
+          <img src="{{ profile.picture.url }}" alt="Profile Pic" class=""
+            style="border: 2px solid black; border-radius: 1em;" height="150em">
+        </div>
+        <div class="col-md-3 text-center">
+          <h1>
+            <u></u><br>
+            <a href="{% url 'home:dashboard' %}" style="color: black;">
+              @{{ user.username }}
+            </a>
+          </h1>
+        </div>
+        <div class="col-md-3 text-center">
+          <h1>
+            <u> </u><br><span>
+              {{ profile.first_name }} {{ profile.last_name}}
+            </span>
+          </h1>
+        </div>
+      </div><br><br>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <a href="{% url 'home:change_password' %}" class="btn btn-outline-success fs-5 mx-5">Change
+            Password</a><br><br>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'home:update_profile' profile.id %}" class="btn btn-outline-success fs-5">Edit
+            Profile</a><br><br>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'blog:create' %}" class="btn btn-outline-success fs-5 mx-5">Create Post</a><br><br>
+        </div>
+      </div>
+  </div>
+  </iv>
+
+
+  <div class="container">
+
+
+    <h1 class="text-center" id="demo" style="color: blueviolet;"></h1>
+
+    <script>
+      var i = 0;
+      var txt = 'All my Posts ...';
+      var speed = 100;
+      typeWriter();
+      function typeWriter() {
+        if (i < txt.length) {
+          document.getElementById("demo").innerHTML += txt.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+    </script>
+
+{% if not_published.count != 0 %}
+<div class="card m-5" style="border: 2px solid,rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
+  <div class="card-body">
+    <h3>Not Published saved as Draft</h3>
+    <ul>
+      {% for post in not_published %}
+      <li>
+        <a href="{% url 'blog:detail' post.id %}">
+          <div class="container">
+            <h1 style="color: black;">{{post.title}}</h1> <br>
+            <div class="row text-center">
+              <div class="col-lg-2">
+                <a href="{% url 'blog:update' post.id %}" class="btn btn-outline-warning fs-5 px-5">Edit</a><br><br>
+              </div>
+              <div class="col-lg-2">
+                <a href="{% url 'blog:publish' post.id %}"
+                  class="btn btn-outline-success fs-5 px-3">Publish</a><br><br>
+              </div>
+              <div class="col-lg-2">
+                <a href="{% url 'blog:delete' post.id %}" class="btn btn-outline-danger fs-5 px-5">
+                  Delete</a><br><br>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+    {% if published.count != 0 %}
+    <div class="card m-5" style="border: 2px solid rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
+      <div class="card-body">
+        <h3>Published</h3>
+        <ul>
+          {% for post in published %}
+          <li>
+            <a href="{% url 'blog:detail' post.id %}" style="color: black;text-decoration: none;">
+              <div class="container">
+                <h1 style="color: black;">{{ post.title }}</h1> <br>
+                <div class="row text-center">
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:update' post.id %}" class="btn btn-outline-warning fs-5 px-5">Edit</a><br><br>
+                  </div>
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:publish' post.id %}"
+                      class="btn btn-outline-info fs-5 px-3">Unpublish</a><br><br>
+                  </div>
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:delete' post.id %}" class="btn btn-outline-danger fs-5 px-5">
+                      Delete</a><br><br>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <hr>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+</div>
+{% else %}
+<h1 class="text-center m-5">You have no access to view this Profile</h1>
+{% endif %}
+{% endblock %}

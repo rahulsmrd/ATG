@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Create Post{% endblock %}
+{% block create_activate %}active{% endblock %}
+{% block body %}
+
+{% if user.profile.is_doctor %}
+<h1 class="text-center my-5" id="create" style="color: blueviolet;"></h1>
+<script>
+    var i = 0;
+        var txt = 'Create a Blog . . .';
+        var speed = 100;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("create").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+</script>
+<div class="card p-2 m-3" style="border: 2px solid green;background-color: rgb(215, 255, 215);border-radius: 1em;">
+    <div class="card-body">
+<form method="post" enctype="multipart/form-data" class="fs-5">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{form.title.label}} : {{form.title}}
+        </div>
+        <div class="col-md-6">
+            {{form.image.label}} : {{form.image}}
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-8">
+            {{form.summary.label}} : {{form.summary}}
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-8">
+            {{form.content.label}} : {{form.content}}
+        </div>
+    </div><br>
+    <p class="fs-5">Category :</p>
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="radio" class="btn-check" id="btncheck1" autocomplete="off" name="cat" value="Covid-19">
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck1">Covid-19</label>
+      
+        <input type="radio" class="btn-check" id="btncheck2" autocomplete="off" name="cat" value="Mental Health">
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck2">Mental Health</label>
+      
+        <input type="radio" class="btn-check" id="btncheck3" autocomplete="off" name="cat" value="Heart Disease">
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck3">Heart Disease</label>
+    
+        <input type="radio" class="btn-check" id="btncheck4" autocomplete="off" name="cat" value="Immunization">
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck4">Immunization</label>
+      </div><br>
+      <button type="submit" class="btn btn-outline-success mt-5 px-5 fs-5">Save as Draft</button>
+      <p>**After saving the Draft you will be taken to a page where you can publish the Article</p>
+</form>
+</div>
+</div>
+{% else %}
+<h1 class="text-center m-5">You have no access to create a Post</h1>
+{% endif %}
+{% endblock %}

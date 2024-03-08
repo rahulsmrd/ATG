@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Update Profile{% endblock %}
+
+{% block body %}
+
+{% if profile.user == user %}
+<div class="container">
+    <h1 style="color: blueviolet;" id="demo" class="text-center my-5"></h1>
+    <script>
+        var i = 0;
+        var txt = 'Update your Profile ...';
+        var speed = 100;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
+
+    <div class="card m-5 p-3 fs-5" style="border: 2px solid rgb(4, 68, 1);border-radius: 1em;background-color: rgb(182, 243, 182);">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{form.first_name.label}} : {{form.first_name}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.last_name.label}} : {{form.last_name}}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col">
+                        Previous image : {{form.picture.value}}
+                        {{form.picture.label}} : {{form.picture}}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{form.address.label}} : {{form.address}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.city.label}} : {{form.city}}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{form.state.label}} : {{form.state}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.pin.label}} : {{form.pin}}
+                    </div>
+                </div><br>
+                {% if form.is_doctor.value == True %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{form.is_doctor.label}} : {{form.is_doctor}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.doc_id.label}} : {{form.doc_id}}
+                    </div>
+                </div>
+                {% endif %}
+
+                <button class="btn btn-outline-warning form-control my-5 fs-5">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<h1 class="text-center m-5">You have no access to Eidt the Profile</h1>
+{% endif %}
+{% endblock %}

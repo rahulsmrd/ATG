@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Posts{% endblock %}
+{% block post_activate %}active{% endblock %}
+{% block post2_activate %}active{% endblock %}
+{% block body %}
+<div class="container">
+
+<h1 id="demo" class="text-center mt-4 mb-5"
+    style="color: rgb(36, 112, 46);font-size: 5em;"></h1>
+
+</div>
+
+{% for post in post_list %}
+<a href="{% url 'blog:detail' post.id %}" style="color: black; text-decoration: none;">
+    <div class="card" style="border: 2px solid rgb(245, 124, 124);border-radius: 1em;background-color: rgb(245, 221, 221);">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-center" style="color: rgb(12, 86, 121);"><b>Title</b> : {{ post.title }}</h2>
+                    <p class="text-center">Posted by : "{{ post.user }}"</p>
+                    <p class="fs-4 ps-3"> <b>Over View</b> : <span id="summary">{{ post.summary }}</span></p>
+                    <p class="fs-5 ps-3"><b>Category</b> : {{ post.category }}</p>
+                    <p class="ps-3">Published Date : {{ post.published_date | date:"d M, Y" }}</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ post.image.url }}" alt="No image found" class="img-thumbnail" style="border: 2px solid blueviolet;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="border: 2px solid black;">
+</a>
+
+                {% endfor %}
+    <script>
+        var i = 0;
+        var txt = 'All Posts . . .';
+        var speed = 100;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        content=document.getElementById("summary");
+        if (content.textContent.length>15) {
+                    let ele="";
+                    for (let i = 0; i < 15; i++) {
+                        ele+=content.textContent[i];
+                    }
+                    ele+="...";
+                    content.innerHTML=ele;
+                }
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Post Details{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-center m-5" style="color: rgb(12, 86, 121);"><u>{{post.title}}</u></h1>
+</div>
+<div class="container">
+    <div class="card mb-5" style="border: 2px solid green; border-radius: 1em;background-color: rgb(210, 252, 210);">
+        <div class="card-body">
+            <p>Published on : {{ post.published_date | date:"d M, Y" }}</p>
+            <img src="{{ post.image.url }}" alt="no image found" class="img-fluid mt-5" style="border: 2px solid rgb(66, 23, 23); border-radius: 1em;">
+            <p class="fs-5 mt-3"><b>Category : </b>{{ post.category }}</p><br><br>
+            <h1 class="px-5" style="border: 2px double rgb(65, 22, 73); width: fit-content;border-radius: 1em;">Overview : </h1>
+            <p class="ps-5 fs-4">{{ post.summary }}</p><br>
+            <h1 class='px-5' style="border: 2px double rgb(65, 22, 73); width: fit-content;border-radius: 1em;">Description : </h1>
+            <p class="ps-5 fs-4">{{ post.content }}</p>
+            <p class="text-center">
+                <a href="{% url 'blog:home' %}" class="btn btn-outline-warning fs-4 my-5 px-5">Go to Posts</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'home:profile' %}" class="btn btn-outline-primary fs-4 ms-5 px-5">Go to Profile</a>
+                {% endif %}
+            </p>
+        </div>
+    <!-- </div>
+            <label for="summary">Summary : </label>
+            <input type="text" id="summary" value="{{ post.summary }}" readonly class="form-control fs-5"><br>
+
+            <label for="category">Category : </label>
+            <input type="text" id="category" value="{{ post.category }}" readonly class="form-control fs-5"><br>
+
+            <label for="content">Description : </label>
+            <textarea id="content" class="form-control fs-5" rows="10" readonly>{{ post.content }}</textarea>
+        </div>
+        <div class="col-md-6 pt-5">
+            <img src="{{  post.image.url}}" alt="no image found" class="img-thumbnail">
+            <caption>Image</caption>
+        </div>
+    </div>
+</div>
+<h1>hii hello</h1>
+{{ post.title }}
+{{ form.as_p }} -->
+{% endblock %}

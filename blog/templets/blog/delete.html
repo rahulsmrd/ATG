@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Delete Post{% endblock %}
+
+{% block body %}
+{% if post.user == user %}
+<div class="card m-5 p-3" style="border: 2px solid red;background-color: rgb(255, 202, 202);">
+    <div class="card-body">
+        <div class="container text-center p-5">
+            <form method="post">
+                {% csrf_token %}
+            <h1>Are you sure, want to DELETE the post titled "{{ post.title }}" ?</h1>
+            <button class="btn btn-outline-danger m-5 fs-4 px-5">Delete</button>
+            <a href="{% url 'home:profile' %}" class="btn btn-outline-success fs-4 px-2">Go back to my posts</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+<h1 class="text-center m-5">You have no access to Delete this Post</h1>
+{% endif %}
+{% endblock %}

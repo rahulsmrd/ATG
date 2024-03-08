@@ -7,6 +7,11 @@ class User(auth.models.User,auth.models.PermissionsMixin):
     def __str__(self):
         return "@{}".format(self.username)
     
+    def is_doctor(self):
+        prof=profile.objects.get(user=self.username)
+        print(prof.is_doctor)
+        return prof.is_doctor
+    
 class profile(models.Model):
     user=models.OneToOneField(mainUser,related_name="profile", on_delete=models.CASCADE)
     first_name=models.CharField(max_length=100)
@@ -20,7 +25,7 @@ class profile(models.Model):
     doc_id=models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self) -> str:
-        return self.user
+        return str(self.user)
 
 class contact_model(models.Model):
     name=models.CharField(max_length=100)

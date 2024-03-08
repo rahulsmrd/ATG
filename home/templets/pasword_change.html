@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Change Password{% endblock %}
+
+{% block body %}
+<div class="container fs-5">
+    <div class="card m-5" style="border: 2px solid rgb(255, 166, 0);background-color: rgb(255, 252, 214);">
+        <div class="card-body">
+            <div class="container p-5">
+                <form method="post">
+                    <h1 class="text-center mb-5">Change Password</h1>
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <br>
+                    <button type="submit" class="btn btn-outline-success fs-5">Change Password</button>
+                    <a href="{% url 'home:profile' %}" class="btn btn-outline-warning fs-5 ms-5">Go to Profile</a>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
