@@ -47,17 +47,34 @@
     </div><br>
     <p class="fs-5">Category :</p>
     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        {% if form.category.value == 'Covid-19' %}
+        <input type="radio" class="btn-check" id="btncheck1" autocomplete="off" name="cat" value="Covid-19" checked>
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck1">Covid-19</label>
+        {% else %}
         <input type="radio" class="btn-check" id="btncheck1" autocomplete="off" name="cat" value="Covid-19">
         <label class="btn btn-outline-success fs-5 px-3" for="btncheck1">Covid-19</label>
-      
-        <input type="radio" class="btn-check" id="btncheck2" autocomplete="off" name="cat" value="Mental Health">
+        {% endif %}
+        {% if form.category.value == 'Mental Health' %}
+        <input type="radio" class="btn-check" id="btncheck2" autocomplete="off" name="cat" value="Mental Health" checked>
         <label class="btn btn-outline-success fs-5 px-3" for="btncheck2">Mental Health</label>
-      
-        <input type="radio" class="btn-check" id="btncheck3" autocomplete="off" name="cat" value="Heart Disease">
+        {% else %}
+        <input type="radio" class="btn-check" id="btncheck2" autocomplete="off" name="cat" value="Mental Health" checked>
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck2">Mental Health</label>
+        {% endif %}
+        {% if form.category.value == 'Heart Disease' %}
+        <input type="radio" class="btn-check" id="btncheck3" autocomplete="off" name="cat" value="Heart Disease" checked>
         <label class="btn btn-outline-success fs-5 px-3" for="btncheck3">Heart Disease</label>
-    
+        {% else %}
+        <input type="radio" class="btn-check" id="btncheck3" autocomplete="off" name="cat" value="Heart Disease" checked>
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck3">Heart Disease</label>
+        {% endif %}
+        {% if form.category.value == 'Immunization' %}
+        <input type="radio" class="btn-check" id="btncheck4" autocomplete="off" name="cat" value="Immunization" checked>
+        <label class="btn btn-outline-success fs-5 px-3" for="btncheck4">Immunization</label>
+        {% else %}
         <input type="radio" class="btn-check" id="btncheck4" autocomplete="off" name="cat" value="Immunization">
         <label class="btn btn-outline-success fs-5 px-3" for="btncheck4">Immunization</label>
+        {% endif %}
       </div>
       <p>Category choosen before : <b>"{{ post.category }}"</b></p>
       <button type="submit" class="btn btn-outline-success mt-5 px-5 fs-5">Save</button>
