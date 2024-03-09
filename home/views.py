@@ -79,8 +79,8 @@ def user_profile(request):
     all_posts=post.objects.filter(user=user)
     pro=profile.objects.filter(user=user)[0]
     return render(request, 'profile.html', {
-        'published': all_posts.filter(published=True).all(),
-        'not_published': all_posts.filter(published=False).all(),
+        'published': all_posts.filter(published=True).all().order_by("-id"),
+        'not_published': all_posts.filter(published=False).all().order_by("-id"),
         'profile':pro
                                             })
 

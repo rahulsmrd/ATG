@@ -26,6 +26,8 @@
     <div class="row">
         <div class="col-md-6">
             {{form.title.label}} : {{form.title}}
+            <p style="color: red;" class="fs-6">**Max limit 1000 Characters</p>
+
         </div>
         <div class="col-md-6">
             {{form.image.label}} : {{form.image}}
@@ -34,11 +36,13 @@
     <div class="row">
         <div class="col-md-8">
             {{form.summary.label}} : {{form.summary}}
+            <p style="color: red;" class="fs-6">**Max limit 1000 Characters</p>
         </div>
     </div><br>
     <div class="row">
         <div class="col-md-8">
             {{form.content.label}} : {{form.content}}
+            <p style="color: red;" class="fs-6">**Max limit 2000 Characters</p>
         </div>
     </div><br>
     <p class="fs-5">Category :</p>

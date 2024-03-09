@@ -31,10 +31,12 @@
                         <a class="nav-link {% block home_activate %}{% endblock %} fs-5 mx-1" aria-current="page"
                             href="/">Home</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% block dashboard_activate %}{% endblock %} fs-5 "
                             href="{% url 'home:dashboard' %}">Dashboard</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link {% block contact_activate %}{% endblock %} fs-5"
                             href="{% url 'home:contact' %}">Contact Us</a>
