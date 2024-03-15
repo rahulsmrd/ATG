@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}All Doctors{% endblock %}
+{% block appointment_activate %}active{% endblock %}
+{% block body %}
+
+{% if user.profile.is_doctor == True %}
+<h1 class="text-center m-5" style="color: blueviolet;text-decoration: underline;">You dont have access to this page</h1><br>
+<p class="text-center" style="color: red;">Only patients can see this page</p>
+{% else %}
+<div class="container m-5">
+    <h1 class="text-center m-5" id="demo" style="color: blueviolet;text-decoration: underline;"></h1>
+
+    <script>
+        var i = 0;
+        var txt = 'Hello Doctors ...';
+        var speed = 100;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
+
+
+    <ol>
+    {% for post in profile_list %}
+    <div class="card" style="border: 2px solid rgb(0, 0, 68);background-color: rgb(235, 248, 204);border-radius: 1em;">
+        <div class="card-body mx-5">
+            <li class="fs-1">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>{{ post.first_name}} {{ post.last_name }}</h1><br>
+                    <a href="{% url 'home:appointment' post.id %}" class="btn btn-outline-info fs-5">Book Appointment</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ post.picture.url }}" alt="" height="150em" class="rounded">
+                </div>
+            </div>
+            <br>
+            </li>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -20,7 +20,7 @@ class index(ListView):
     def get_queryset(self) -> QuerySet[Any]:
         return post.objects.filter(published=True).order_by('published_date').all()
 
-class detail_post(DeleteView):
+class detail_post(DetailView):
     model=post
     template_name="blog/detail.html"
 

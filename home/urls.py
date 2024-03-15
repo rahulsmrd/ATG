@@ -16,6 +16,12 @@ urlpatterns = [
     path("logout/",auth_views.LogoutView.as_view(),name="logout"),
     path("change_password/",views.PasswordChangeView.as_view(),name="change_password"),
     path('update_profile/<pk>/',views.update_profile_data.as_view(),name="update_profile"),
+    path('book/',views.book_appointment.as_view(),name="book_appointment"),
+    path('book_appointment/<pk>/',views.appointment,name="appointment"),
+    path('confirm/<pk>/',views.confirmation,name="confirmation"),
+    path('appointment_details/<pk>/',views.appointment_details.as_view(),name="appointment_details"),
+    path('dele_confirm/<pk>/',views.dele_confirm,name="dele_confirm"),
+    path('delete_appointment/<pk>/',views.delete_appointment,name="delete_appointment"),
 
 ]
 

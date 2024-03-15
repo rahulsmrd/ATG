@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Appointment Details{% endblock %}
+{% block home_activate %}active{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center mt-5" id="demo" style="color: blueviolet;"></h1>
+    <script>
+        var i = 0;
+        var txt = 'Appointment Details ...';
+        var speed = 100;
+        typeWriter();
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("demo").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
+
+
+    <div class="card m-5" style="border: 2px solid rgb(0, 0, 68);border-radius: 1em;">
+        <div class="card-body m-3">
+            <table class="table table-striped fs-3">
+                <tr>
+                    <th> Doctor Name </th>
+                    <td>Dr. {{ appointment_model.doctor_name }}</td>
+                </tr>
+                <tr>
+                    <th> Appointment Start Date</th>
+                    <td>{{ appointment_model.start_date }}</td>
+                </tr>
+                <tr>
+                    <th> Appointment Start Time</th>
+                    <td>{{ appointment_model.start_time | time:"g:i A" }}</td>
+                </tr>
+                <tr>
+                    <th> Appointment End Time </th>
+                    <td>{{ appointment_model.end_time | time:"g:i A" }}</td>
+                </tr>
+            </table>
+            <a href="{% url 'home:profile' %}" class="btn btn-outline-success m-5 fs-5">Back To Profile</a>
+            {% if user.profile.is_doctor == False %}
+            <a href="{% url 'home:dele_confirm' appointment_model.pk %}" class="btn btn-outline-danger m-5 fs-5">Delete Appointment</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

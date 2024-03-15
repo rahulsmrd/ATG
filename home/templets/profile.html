@@ -66,43 +66,45 @@
       }
     </script>
 
-{% if not_published.count != 0 %}
-<div class="card m-5" style="border: 2px solid,rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
-  <div class="card-body">
-    <h3>Not Published saved as Draft</h3>
-    <ul>
-      {% for post in not_published %}
-      <li>
-        <a href="{% url 'blog:detail' post.id %}">
-          <div class="container">
-            <h1 style="color: black;">{{post.title}}</h1> <br>
-            <div class="row text-center">
-              <div class="col-lg-2">
-                <a href="{% url 'blog:update' post.id %}" class="btn btn-outline-warning fs-5 px-5">Edit</a><br><br>
+    {% if not_published.count != 0 %}
+    <div class="card m-5"
+      style="border: 2px solid rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
+      <h3 class="ms-5 mt-3">Not Published saved as Draft</h3>
+      <div class="card-body mx-5" style="overflow: scroll;height: 20em;">
+        <ul>
+          {% for post in not_published %}
+          <li>
+            <a href="{% url 'blog:detail' post.id %}">
+              <div class="container">
+                <h1 style="color: black;">{{post.title}}</h1> <br>
+                <div class="row text-center">
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:update' post.id %}" class="btn btn-outline-warning fs-5 px-5">Edit</a><br><br>
+                  </div>
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:publish' post.id %}"
+                      class="btn btn-outline-success fs-5 px-3">Publish</a><br><br>
+                  </div>
+                  <div class="col-lg-2">
+                    <a href="{% url 'blog:delete' post.id %}" class="btn btn-outline-danger fs-5 px-5">
+                      Delete</a><br><br>
+                  </div>
+                </div>
+                <hr>
               </div>
-              <div class="col-lg-2">
-                <a href="{% url 'blog:publish' post.id %}"
-                  class="btn btn-outline-success fs-5 px-3">Publish</a><br><br>
-              </div>
-              <div class="col-lg-2">
-                <a href="{% url 'blog:delete' post.id %}" class="btn btn-outline-danger fs-5 px-5">
-                  Delete</a><br><br>
-              </div>
-            </div>
-            <hr>
-          </div>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-{% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
 
     {% if published.count != 0 %}
-    <div class="card m-5" style="border: 2px solid rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
-      <div class="card-body">
-        <h3>Published</h3>
+    <div class="card m-5"
+      style="border: 2px solid rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
+      <h3 class="ms-5 mt-3">Published</h3>
+      <div class="card-body mx-5" style="overflow: scroll;height: 20em;">
         <ul>
           {% for post in published %}
           <li>
@@ -131,7 +133,47 @@
       </div>
     </div>
     {% endif %}
-
+    <div class="card m-5"
+      style="border: 2px solid rgb(0, 0, 68);background-color: rgb(213, 255, 232);border-radius: 1em;">
+      <h3 class="ms-5 mt-3">My Appointments</h3>
+      {% if appointments.count == 0 %}
+      <p class="ms-5 mt-3">No Appointments as of now ...<p>
+      {% else %}
+      <div class="card-body mx-5" style="overflow: scroll;height: 20em;">
+        <div class="row ">
+          <div class="col-md-3 text-center mx-1">
+            <b><span class="fs-4"><u>Doctor Name </u></span></b>
+          </div>
+          <div class="col-md-4 text-center mx-1">
+            <b><span class="fs-4"><u>Appointment Start Date </u></span></b>
+          </div>
+          <div class="col-md-4 text-center mx-1">
+            <b><span class="fs-4"><u>Appointment Start Time </u></span></b>
+          </div>
+        </div>
+        <hr>
+        <ol>
+          {% for appointment in appointments %}
+          <a href="{% url 'home:appointment_details' appointment.id %}" style="color: black;text-decoration: none;">
+            <li class="fs-4">
+              <div class="row ">
+                <div class="col-md-3 text-center mx-1">
+                  <b><span class="fs-4">{{ appointment.doctor_name }}</span></b>
+                </div>
+                <div class="col-md-4 text-center mx-1">
+                  <b><span class="fs-4">{{ appointment.start_date | date:"d M Y" }}</span></b>
+                </div>
+                <div class="col-md-4 text-center mx-1">
+                  <b><span class="fs-4">{{ appointment.start_time | time:"g:i A" }}</span></b>
+                </div>
+              </div>
+            </li>
+          </a><hr>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+    </div>
   </div>
 </div>
 </div>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Delete Appointment{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="card m-5" style="background-color: rgb(255, 216, 216);border: 2px solid black;border-radius: 1em;">
+        <div class="card-body">
+            <h1 class="text-center">
+                Do you want to delete appointment with <br><br><u><b>"Dr. {{ appointment.doctor_name }}"</b></u> ?
+            </h1>
+            <a href="{% url 'home:delete_appointment' appointment.pk %}" class="btn btn-outline-danger m-5 fs-5">Yes, Delete Appointment</a>
+            <a href="{% url 'home:appointment_details' appointment.pk %}" class="btn btn-outline-success m-5 fs-5">No, Go back to Appointment Details</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

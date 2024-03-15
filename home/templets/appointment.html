@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Book Appointment{% endblock %}
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <h1 class="text-center mt-5" id="demo" style="color: blueviolet;"></h1>
+        <script>
+            var i = 0;
+            var txt = 'Book Appointment ...';
+            var speed = 100;
+            typeWriter();
+            function typeWriter() {
+                if (i < txt.length) {
+                    document.getElementById("demo").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+        </script>
+        <div class="card m-5 fs-5" style="border: 2px solid rgb(0, 0, 68);background-color: rgb(244, 232, 255);border-radius: 1em;">
+            <div class="card-body mx-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="doctor_name">Doctor Name :</label>
+                        <input type="text" name="doctor_name" id="doctor_name" class="form-control fs-5" value="{{user_data.first_name}} {{user_data.last_name}}" readonly><br>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="doctor_email">Doctor Email :</label>
+                        <input type="text" name="doctor_email" id="doctor_email" class="form-control fs-5" value="{{user_data.user.email}}" readonly><br>
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="speciality">Speciality :</label>
+                        <input type="text" name="speciality" class="form-control" id="speciality"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="start_date">Start Date :</label>
+                        <input type="date" name="start_date" class="form-control" id="start_date">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="start_time">Start Time :</label>
+                        <input type="time" name="start_time" class="form-control" id="start_time">
+                    </div>
+                </div><br><br>
+                
+                
+                
+                <button type="submit" class="btn btn-outline-success form-control fs-5">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
